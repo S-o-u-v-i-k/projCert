@@ -1,14 +1,14 @@
 pipeline {
     agent any
     tools {
-        jdk 'java1.8'
+        jdk 'java11'
     }
     stages {
         stage('compile') {
 	         steps {
                 // step1 
                 echo 'compiling..'
-		            git url: 'https://github.com/S-o-u-v-i-k/projCert/tree/master/website'
+		            git url: 'https://github.com/S-o-u-v-i-k/projCert/'
 		            sh script: '/opt/maven/bin/mvn compile'
            }
         }
@@ -41,11 +41,11 @@ pipeline {
 	         steps {
                 // step4
                 echo 'codecoverage..'
-		            sh script: '/opt/maven/bin/mvn cobertura:cobertura -Dcobertura.report.format=xml'
+		            sh script: '/opt/maven/bin/mvn verify'
            }
 	         post {
                success {
-	               cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'target/site/cobertura/coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false                  
+	               jacoco (**/**.exec)                  
                }
            }		
         }
