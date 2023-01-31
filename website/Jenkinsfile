@@ -45,7 +45,7 @@ pipeline {
            }
 	         post {
                success {
-	               jacoco (**/**.exec)                  
+	               jacoco(execPattern: '**/build/jacoco/**.exec', classPattern: '**/classes/*/main')                  
                }
            }		
         }
