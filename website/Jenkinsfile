@@ -10,6 +10,7 @@ pipeline {
                 echo 'compiling..'
 		            git url: 'https://github.com/S-o-u-v-i-k/projCert/'
 		            sh script: '/opt/maven/bin/mvn compile'
+			    sh script: 'mvn -f src/main/webapp/pom.xml'
            }
         }
         stage('codereview-pmd') {
