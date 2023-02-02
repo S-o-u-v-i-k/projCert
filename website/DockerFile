@@ -1,4 +1,0 @@
-FROM tomcat:8.5.45
-COPY target/Project1.war /usr/local/tomcat/webapps
-
-CMD apachectl -D FOREGROUND
